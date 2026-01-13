@@ -1,0 +1,32 @@
+<h2>Scoping und IIFE</h2>
+<div class="section-content">
+    <p>
+        Eine IIFE (Immediately Invoked Function Expression) ist eine Funktion, die sofort nach ihrer Definition
+        ausgeführt wird.
+        Sie ermöglicht es, private Variablen zu erstellen, die von außen nicht zugänglich sind (Encapsulation).
+    </p>
+
+    <h3>Beispiel: Counter mit privatem Zustand</h3>
+    <pre><code class="language-javascript">const Counter = (() => {
+  let n = 0;  // private Variable
+  return {
+    inc: () => ++n,
+    dec: () => --n,
+    value: () => n,
+  };
+})();
+
+// Zugriff auf die Methoden:
+console.log(Counter.value()); // 0 (Startwert)
+Counter.inc();                // erhöht auf 1
+Counter.inc();                // erhöht auf 2
+console.log(Counter.value()); // 2
+Counter.dec();                // verringert auf 1
+console.log(Counter.value()); // 1</code></pre>
+
+    <p>
+        <strong>Erklärung:</strong> Die Variable <code>n</code> ist innerhalb der IIFE gekapselt und kann nur über
+        die zurückgegebenen Methoden <code>inc()</code>, <code>dec()</code> und <code>value()</code> manipuliert
+        bzw. abgefragt werden. Ein direkter Zugriff auf <code>n</code> von außen ist nicht möglich.
+    </p>
+</div>
