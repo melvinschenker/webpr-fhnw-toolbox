@@ -8,11 +8,7 @@
  */
 const sections = [
   'scopingAndIIFE.html',
-  'closures.html',
-  'arrow-functions.html',
-  'destructuring.html',
-  'promises.html',
-  'async-await.html',
+  'lambda.html'
 ];
 
 // ============================================================================

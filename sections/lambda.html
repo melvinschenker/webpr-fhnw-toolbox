@@ -1,0 +1,59 @@
+<h2>Lambda Essentials</h2>
+
+<div class="section-content">
+  <p>
+    Fundamentale Higher-Order Functions der funktionalen Programmierung: <strong>Curry</strong>, <strong>Pipe</strong>
+    und <strong>Compose</strong>.
+  </p>
+
+  <h3>Curry</h3>
+  <pre><code class="language-javascript">// Curry: f(a,b,c) zu f(a)(b)(c)
+const curry = f => (...xs) =>
+  xs.length >= f.length ? f(...xs) : (...ys) => curry(f)(...xs, ...ys);
+
+const add = (a, b) => a + b;
+const add3 = curry(add)(3);
+console.log(add3(5));  // 8</code></pre>
+
+  <h3>Pipe</h3>
+  <pre><code class="language-javascript">// Pipe: Lässt Funktionen von links nach rechts ausführen.
+const pipe = (...fs) => x => fs.reduce((v, f) => f(v), x);
+
+const times = (a, b) => a * b;
+const add3 = curry(add)(3);
+const times2 = curry(times)(2);
+
+console.log(pipe(add3, times2)(5));  // (5 + 3) * 2 = 16</code></pre>
+
+  <h3>Compose</h3>
+  <pre><code class="language-javascript">// Compose: Lässt Funktionen von rechts nach links ausführen.
+const compose = (...fs) => x => fs.reduceRight((v, f) => f(v), x);
+
+const f = x => x + 1;
+const g = x => x * 2;
+const h = compose(f, g);  // f(g(x))
+console.log(h(5));  // f(g(5)) = f(10) = 11</code></pre>
+
+  <h3>Beispiel: Username-Validierung</h3>
+  <pre><code class="language-javascript">// Validierungs-Funktionen
+const trim = str => str.trim();
+const toLowerCase = str => str.toLowerCase();
+const removeSpaces = str => str.replace(/\s+/g, '');
+const minLength = curry((min, str) => str.length >= min ? str : null);
+const maxLength = curry((max, str) => str.length <= max ? str : null);
+
+// Username-Validierung
+const validateUsername = pipe(
+  trim,
+  toLowerCase,
+  removeSpaces,
+  minLength(3),
+  maxLength(20)
+);
+
+// Verwendung
+const validUser = validateUsername("  John Doe 123  ");
+console.log(username);  // "johndoe123"
+const invalidUser = validateUsername("  JD  ");
+console.log(invalidUser);  // null (zu kurz)</code></pre>
+</div>
