@@ -11,7 +11,8 @@ const sections = [
   'lambda.html',
   'evalVsFunction.html',
   'thisContext.html',
-  'prototypeExtensions.html'
+  'prototypeExtensions.html',
+  'ambientTypeDefinitions.html'
 ];
 
 // ============================================================================

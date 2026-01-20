@@ -1,0 +1,48 @@
+<h2>Zentrales Typing</h2>
+
+<div class="section-content">
+  <p>
+    Das Prinzip nennt sich <code>Ambient Type Definitions</code>. Du lagerst
+    alle Datentypen in eine separate Datei aus, damit dein eigentlicher Code
+    sauber bleibt.
+  </p>
+
+  <ol>
+    <li>
+      <b>Erstellen:</b> Lege eine Datei types.js (oder types.d.ts für bessere
+      IDE-Erkennung) im Projektordner an.
+    </li>
+    <li>
+      <b>Definieren:</b> Schreibe dort nur JSDoc-Kommentare (@typedef) rein.
+      Kein ausführbarer Code.
+    </li>
+    <li>
+      <b>Nutzen:</b> In anderen JS-Dateien kannst du die Typen via JSDoc
+      referenzieren (moderne IDEs wie VSCode unterstützen das automatisch).
+    </li>
+  </ol>
+  <h3>types.js</h3>
+  <pre><code class="language-javascript">/**
+	* @typedef {Object} Product
+	* @property {number} id - Eindeutige Produkt-ID
+	* @property {string} name - Name des Produkts
+	* @property {number} price - Preis in CHF
+*/</code></pre>
+
+  <h3>main.js</h3>
+  <pre><code class="language-javascript">/**
+	* Berechnet den Gesamtpreis aller Produkte im Warenkorb.
+	* @param {Product[]} cart - Array von Produkten im Warenkorb
+	* @returns {number} Gesamtpreis
+*/
+function calculateTotal(cart) {
+	// Automatische Typprüfung für Array-Elemente ('cart' ist ein Array von 'Product')
+	return cart.reduce((total, item) => total + item.price, 0);
+}</code></pre>
+
+  <p>
+    <b>Warum das funktioniert:</b>Die IDE indiziert das gesamte
+    Projektverzeichnis für IntelliSense. Dem Browser ist es egal, da es sich nur
+    um Kommentare handelt - zur Laufzeit existieren diese Typen nicht.
+  </p>
+</div>
