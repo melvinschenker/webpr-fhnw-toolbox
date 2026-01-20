@@ -1,0 +1,32 @@
+<h2>THIS-Kontext: Funktionen vs. Arrow</h2>
+
+<div class="section-content">
+  <p>
+    <strong>Merke:</strong> Bei normalen Funktionen ist
+    <code>this</code> dynamisch (hängt vom Aufruf ab). Bei Arrow Functions ist
+    <code>this</code> lexikalisch (vom umgebenden Scope festgelegt) und daher
+    für Methoden selten geeignet.
+  </p>
+
+  <h3>Grundaufbau</h3>
+  <pre><code class="language-javascript">const User = {
+  name: "Anna",
+  // Klassische Funktion: this hängt vom Aufruf ab
+  sayHello: function() { console.log("Hello, I am " + this.name); },
+  // Arrow: this ist fest vom äußeren Scope; oft window/global
+  sayHelloArrow: () => console.log("Arrow: I am " + this.name);
+};</code></pre>
+
+  <h3>Szenario 1: Direkter Aufruf</h3>
+  <pre><code class="language-javascript">// Links vom Punkt: User
+User.sayHello();       // "Hello, I am Anna" (OK)
+User.sayHelloArrow();  // "Arrow: I am undefined" (this zeigt nicht auf User)</code></pre>
+
+  <h3>Szenario 2: Kontext-Verlust (Callback / Referenz)</h3>
+  <pre><code class="language-javascript">const looseFunc = User.sayHello; // this geht verloren
+// ❌ Error: Cannot read property 'name' of undefined</code></pre>
+
+  <h3>Szenario 3: Der Fix (bind)</h3>
+  <pre><code class="language-javascript">const safeFunc = User.sayHello.bind(User); // this fest verdrahten
+safeFunc(); // "Hello, I am Anna" (immer korrekt)</code></pre>
+</div>

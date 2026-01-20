@@ -1,0 +1,35 @@
+<h2>eval() vs Function() Konstruktor</h2>
+
+<div class="section-content">
+  <p>
+    Ein kritischer Unterschied bei der Ausführung von dynamischem Code:
+    <code>eval()</code> läuft im <strong>lokalen Scope</strong> und kann
+    Seiteneffekte verursachen, <code>Function()</code> läuft im
+    <strong>globalen Scope</strong> und ist sicherer.
+  </p>
+
+  <h3>Beispiel: Sichere Formel-Auswertung</h3>
+
+  <h4>❌ Problem mit eval()</h4>
+  <pre><code class="language-javascript">let adminAccess = false;
+const formula = "adminAccess = true; x * 2";
+eval(formula); // adminAccess ist jetzt true!</code></pre>
+
+  <h4>✅ Lösung mit Function()</h4>
+  <pre><code class="language-javascript">let adminAccess = false;
+const func = new Function('x', 'adminAccess = true; return x * 2');
+func(5); // 10 adminAccess bleibt false!</code></pre>
+
+  <h3>Merksätze</h3>
+  <ul>
+    <li>
+      <code>eval()</code> = gefährlich, weil es
+      <strong>alles im lokalen Kontext</strong> kann
+    </li>
+    <li>
+      <code>Function()</code> = sicher, weil es
+      <strong>nur mit Parametern</strong> arbeitet
+    </li>
+    <li>Für User-Input: <strong>immer Function() verwenden!</strong></li>
+  </ul>
+</div>
