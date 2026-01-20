@@ -1,0 +1,52 @@
+<h2>Prototype-Erweiterungen</h2>
+
+<div class="section-content">
+  <p>
+    JavaScript erlaubt es, Built-in-Typen wie <code>Number</code> oder
+    <code>Array</code> um eigene Methoden zu erweitern. Dadurch können wir
+    elegante, Ruby-artige Syntax nutzen.
+  </p>
+
+  <h3>Number.times() - Ruby-Style Loops</h3>
+  <p>
+    Statt <code>for(let i=0; i&lt;5; i++)</code> können wir schreiben:
+    <code>(5).times(...)</code>
+  </p>
+  <pre><code class="language-javascript">if (!Number.prototype.times) {
+  Number.prototype.times = function(callback) {
+    const limit = this.valueOf();
+    for (let i = 0; i < limit; i++) {
+      callback(i);
+    }
+  };
+}
+
+// Beispiel: Array mit Testdaten generieren
+const users = [];
+(10).times(i => {
+  users.push({ id: i + 1, name: `User${i + 1}` });
+});
+// [{id:1, name:"User1"}, {id:2, name:"User2"}, ...]
+</code></pre>
+
+  <h3>Best Practices</h3>
+  <ul>
+    <li>
+      <strong>Guard Check:</strong> Immer mit
+      <code>if (!Type.prototype.method)</code> prüfen, damit keine bestehenden
+      Methoden überschrieben werden
+    </li>
+    <li>
+      <strong>this.valueOf():</strong> Bei Primitives wie Number nutzen, um den
+      Wert zu extrahieren
+    </li>
+    <li>
+      <strong>Native Typen:</strong> Nur in kontrollierten Umgebungen erweitern,
+      nicht in großen Bibliotheken
+    </li>
+    <li>
+      <strong>Vorsicht:</strong> In production Code kann das zu Konflikten
+      führen (z.B. wenn der Browser später die gleiche Methode einführt)
+    </li>
+  </ul>
+</div>

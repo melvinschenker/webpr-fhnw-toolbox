@@ -10,7 +10,8 @@ const sections = [
   'scopingAndIIFE.html',
   'lambda.html',
   'evalVsFunction.html',
-  'thisContext.html'
+  'thisContext.html',
+  'prototypeExtensions.html'
 ];
 
 // ============================================================================
