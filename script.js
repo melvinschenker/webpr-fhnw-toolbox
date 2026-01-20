@@ -8,7 +8,8 @@
  */
 const sections = [
   'scopingAndIIFE.html',
-  'lambda.html'
+  'lambda.html',
+  'evalVsFunction.html'
 ];
 
 // ============================================================================
@@ -123,21 +124,6 @@ const setupScrollTracking = () => {
 
   if (sections.length === 0 || tocLinks.length === 0) return;
 
-  // Initial highlight on page load
-  updateActiveSection();
-
-  // Throttled scroll listener for better performance
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updateActiveSection();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
   /**
    * Updates the active state of TOC links based on scroll position.
    * Handles edge cases for top and bottom of page.
@@ -183,6 +169,21 @@ const setupScrollTracking = () => {
       tocLinks[index].classList.add('active');
     }
   }
+
+  // Initial highlight on page load
+  updateActiveSection();
+
+  // Throttled scroll listener for better performance
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 }
 
 // ============================================================================
