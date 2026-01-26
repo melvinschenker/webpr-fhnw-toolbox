@@ -12,7 +12,9 @@ const sections = [
   'evalVsFunction.html',
   'thisContext.html',
   'prototypeExtensions.html',
-  'ambientTypeDefinitions.html'
+  'ambientTypeDefinitions.html',
+  'asyncAwait.html',
+  'es6Modules.html',
 ];
 
 // ============================================================================

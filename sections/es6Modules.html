@@ -1,0 +1,39 @@
+<h2>ES6 Modules</h2>
+
+<div class="section-content">
+  <p>
+    <strong>ES6 Modules</strong> ermöglichen wiederverwendbare Code-Dateien mit
+    <strong>Named Exports</strong> und <strong>Imports</strong>.
+  </p>
+
+  <h3>tools.js - Exports</h3>
+  <pre><code class="language-javascript">// Export: Diese Funktionen sind in anderen Dateien nutzbar
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;</code></pre>
+
+  <h3>main.js - Imports</h3>
+  <pre><code class="language-javascript">// Import: Spezifische Funktionen aus tools.js laden
+import { add, multiply } from './tools.js';
+
+console.log(add(5, 3));        // 8
+console.log(multiply(4, 7));   // 28</code></pre>
+
+  <h3>index.html</h3>
+  <pre><code class="language-html">&lt;!-- type="module" aktiviert ES6 Modul-Syntax --&gt;
+&lt;script type="module" src="main.js"&gt;&lt;/script&gt;</code></pre>
+
+  <h3>Default Export</h3>
+  <pre><code class="language-javascript">// tools.js: Ein Hauptexport pro Datei
+export default function calculate(a, b) {
+    return a + b;
+}
+
+// main.js: Import ohne Klammern, Name frei wählbar
+import calc from './tools.js';
+console.log(calc(10, 20));     // 30</code></pre>
+
+  <p>
+    <strong>Named vs. Default Export:</strong> Named Exports erlauben mehrere
+    Exports pro Datei, Default Export ist der Hauptexport (nur einer pro Datei).
+  </p>
+</div>
