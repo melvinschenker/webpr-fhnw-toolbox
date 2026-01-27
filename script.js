@@ -15,6 +15,8 @@ const sections = [
   'ambientTypeDefinitions.html',
   'asyncAwait.html',
   'es6Modules.html',
+  'lazyCalculation.html',
+  'iterators.html',
 ];
 
 // ============================================================================

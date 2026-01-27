@@ -1,0 +1,63 @@
+<h2>Iteratoren: State Cycler (Round-Robin)</h2>
+
+<div class="section-content">
+  <p>
+    Ein Button soll durch mehrere Zustände rotieren (z.B. Sortierung,
+    Theme-Switcher, Ampel-Simulation, Slider-Karussell). Ohne Iterator: Globale
+    <code>currentIndex</code>-Variable, manuelle Modulo-Berechnung, if-Checks.
+  </p>
+  <p>
+    <strong>Lösung:</strong> Ein <strong>Generator-Iterator</strong> kapselt den
+    Zustand. Du rufst einfach <code>.next()</code> auf - die Index-Verwaltung
+    geschieht automatisch.
+  </p>
+
+  <h3>Implementierung: State Cycler</h3>
+  <pre><code class="language-javascript">/**
+ * Erstellt einen Iterator, der endlos durch die gegebenen Zustände rotiert.
+ * Nutzt eine Generator-Funktion (function*) für einfaches Iterator-Protokoll.
+ */
+function* createCycler(states) {
+    let index = 0;
+    while (true) {
+        yield states[index];
+        // Setzt den Index zurück auf 0, wenn das Ende erreicht ist
+        index = (index + 1) % states.length; 
+    }
+}</code></pre>
+
+  <h3>Beispiel: Sortier-Button</h3>
+  <pre><code class="language-javascript">const sortState = createCycler(['⬆️', '⬇️', '⏺️']);
+
+let currentSort = sortState.next().value; // Initialer Zustand
+console.log(currentSort); // "⬆️"
+
+// Simulierter Click-Handler (z.B. button.onclick)
+function onSortButtonClick() {
+    const nextState = sortState.next().value; // Keine Index-Berechnung nötig!
+    console.log(`Sortierung geändert auf: ${nextState}`); // updateTable(nextState)...
+}
+
+// Test-Klicks
+onSortButtonClick(); // "⬇️"
+onSortButtonClick(); // "⏺️"
+onSortButtonClick(); // "⬆️" (fängt wieder von vorne an)
+onSortButtonClick(); // "⬇️"</code></pre>
+
+  <h3>Vorteile</h3>
+  <ul>
+    <li><strong>Gekapselt:</strong> Keine globalen Index-Variablen nötig</li>
+    <li>
+      <strong>Wiederverwendbar:</strong> Funktioniert für beliebige
+      Zustandslisten
+    </li>
+    <li>
+      <strong>Sauber:</strong> Keine if-Checks oder Modulo-Berechnungen im
+      Event-Handler
+    </li>
+    <li>
+      <strong>Iterator-Protokoll:</strong> Nutzt JavaScript's natives
+      Iterator-Interface
+    </li>
+  </ul>
+</div>

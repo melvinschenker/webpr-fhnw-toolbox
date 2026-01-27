@@ -1,0 +1,51 @@
+<h2>Lazy Calculation (Memoization)</h2>
+
+<div class="section-content">
+  <p>
+    Teure Operationen (z.B. komplexe Berechnungen, Konfigurationsdateien) sollen
+    erst bei Bedarf und maximal einmal ausgeführt werden.
+  </p>
+  <p>
+    <strong>Lösung:</strong> Die <strong>Lazy</strong>-Funktion berechnet den
+    Wert erst beim ersten Aufruf und speichert ihn für zukünftige Aufrufe
+    (Caching). Entspricht der <em>"DataFlowVariable"</em>:
+    <em>"Function that sets a value if it is not already set"</em>.
+  </p>
+
+  <h3>Implementierung & Beispiel</h3>
+  <pre><code class="language-javascript">/**
+ * Führt die übergebene Funktion (producer) nur EINMAL aus,
+ * sobald die Daten tatsächlich gebraucht werden.
+ */
+const lazy = (producer) => {
+    let value;
+    let hasValue = false;
+
+    return () => {
+        if (!hasValue) {
+            value = producer(); // Teure Operation läuft hier
+            hasValue = true;
+        }
+        return value;
+    };
+};
+
+// Simuliert das Laden einer großen Konfigurationsdatei
+const getConfig = lazy(() => {
+    console.log("Lade Konfiguration...");
+    return { theme: 'dark', version: '1.0.5' };
+});
+
+// 1. Verwendung: Config wird geladen
+const config1 = getConfig(); 
+console.log(config1.theme); // "Lade Konfiguration..." → "dark"
+
+// 2. Verwendung: Aus dem Cache
+const config2 = getConfig();
+console.log(config2.version); // "1.0.5" (ohne erneutes Laden)</code></pre>
+
+  <p>
+    <strong>Anwendung:</strong> Konfigurationsdateien, teure Berechnungen,
+    DOM-Queries, API-Calls, Library-Initialisierung, Singleton-Pattern.
+  </p>
+</div>
