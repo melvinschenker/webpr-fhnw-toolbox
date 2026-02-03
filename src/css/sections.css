@@ -1,0 +1,51 @@
+/* ============================================================================
+   Section Styles
+   ============================================================================ */
+
+section {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+section:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+section h2 {
+  margin: 0;
+  padding: 20px;
+  background: #f8f9fa;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2c3e50;
+}
+
+section h2:hover {
+  background: #e9ecef;
+}
+
+section h2::after {
+  content: "▼";
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+section.collapsed h2::after {
+  transform: rotate(-90deg);
+}
+
+.section-content {
+  padding: 20px;
+  display: block;
+}
+
+section.collapsed .section-content {
+  display: none;
+}
