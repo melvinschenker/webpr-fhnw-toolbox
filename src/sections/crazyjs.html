@@ -1,7 +1,7 @@
 <h2>Crazy JS: Equality Map</h2>
 
 <div class="section-content">
-  <p>Interaktives Spiel zu den Vergleichsoperatoren in JavaScript.</p>
+  <p>Interaktives Spiel zu den Vergleichsoperatoren in JavaScript. Manchmal ist JavaScript noch verückter als man denkt :)</p>
 
   <strong>== (loose equality):</strong> Führt Typ-Konversion durch
   <pre><code class="language-javascript">'' == 0; // true (leerer String wird zu 0 konvertiert)
@@ -24,13 +24,24 @@ null === undefined; // false (unterschiedliche Typen)</code></pre>
       <option value="==">==</option>
       <option value="===">===</option>
     </select>
+
+    <div style="display: flex">
+      <div class="equality-cell correct"></div>
+      <strong>Korrekte Antwort</strong>
+    </div>
+
+    <div style="display: flex">
+      <div class="equality-cell wrong"></div>
+      <strong>Falsche Antwort</strong>
+    </div>
+
     <strong id="equality-score" class="equality-score">Punkte: 0</strong>
   </div>
 
   <div id="equality-map"></div>
 
   <p>
-    <strong>Best Practice:</strong> Verwende immer <code>===</code> für
-    Vergleiche, um überraschende Typ-Konversionen zu vermeiden!
+    <strong>Best Practice:</strong> Verwende immer <code>===</code> für Vergleiche, um überraschende Typ-Konversionen zu
+    vermeiden!
   </p>
 </div>
