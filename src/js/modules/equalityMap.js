@@ -51,7 +51,7 @@ export const setupEqualityMap = () => {
     frag.appendChild(document.createElement("div"));
     axis.forEach((f, x) => {
       const el = document.createElement("div");
-      el.className = "equality-label equality-label-header";
+      el.className = "equality-label equality-label-col-header";
       el.textContent = format(f());
       el.dataset.x = x;
       frag.appendChild(el);
@@ -60,7 +60,7 @@ export const setupEqualityMap = () => {
     // Body
     axis.forEach((rowFactory, y) => {
       const rowLabel = document.createElement("div");
-      rowLabel.className = "equality-label equality-label-row";
+      rowLabel.className = "equality-label equality-label-row-header";
       rowLabel.textContent = format(rowFactory());
       rowLabel.dataset.y = y;
       frag.appendChild(rowLabel);
@@ -80,11 +80,11 @@ export const setupEqualityMap = () => {
 
   const attachEventListeners = () => {
     const clearHover = () => {
-      map.querySelectorAll(".equality-cell.hover-active").forEach((c) => {
-        c.classList.remove("hover-active");
+      map.querySelectorAll(".equality-cell.hover").forEach((c) => {
+        c.classList.remove("hover");
       });
-      map.querySelectorAll(".equality-label.hover-active").forEach((l) => {
-        l.classList.remove("hover-active");
+      map.querySelectorAll(".equality-label.hover").forEach((l) => {
+        l.classList.remove("hover");
       });
     };
 
@@ -93,15 +93,15 @@ export const setupEqualityMap = () => {
         const cx = Number(c.dataset.x);
         const cy = Number(c.dataset.y);
         if (cx === x || cy === y) {
-          c.classList.add("hover-active");
+          c.classList.add("hover");
         }
       });
 
-      const header = map.querySelector(`.equality-label-header[data-x="${x}"]`);
-      if (header) header.classList.add("hover-active");
+      const header = map.querySelector(`.equality-label-col-header[data-x="${x}"]`);
+      if (header) header.classList.add("hover");
 
-      const row = map.querySelector(`.equality-label-row[data-y="${y}"]`);
-      if (row) row.classList.add("hover-active");
+      const row = map.querySelector(`.equality-label-row-header[data-y="${y}"]`);
+      if (row) row.classList.add("hover");
     };
 
     map.addEventListener("mouseover", (e) => {

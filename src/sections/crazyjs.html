@@ -18,67 +18,14 @@ null === undefined; // false (unterschiedliche Typen)</code></pre>
     <li><strong>🖱️Rechtsklick</strong> = <code>false</code></li>
   </ul>
 
-  <div style="display: flex; gap: 10px">
+  <div class="equality-toolbar">
     <label for="equality-operator"><strong>Operator:</strong></label>
-    <select id="equality-operator">
+    <select id="equality-operator" class="equality-select">
       <option value="==">==</option>
       <option value="===">===</option>
     </select>
-    <strong id="equality-score" style="margin-left: auto">Punkte: 0</strong>
+    <strong id="equality-score" class="equality-score">Punkte: 0</strong>
   </div>
-
-  <style>
-    #equality-map {
-      justify-content: center;
-    }
-
-    .equality-grid {
-      display: grid;
-      gap: 4px;
-      margin-top: 12px;
-      user-select: none;
-    }
-
-    .equality-cell {
-      width: 25px;
-      height: 25px;
-      border-radius: 6px;
-      background: #1f2444;
-      cursor: pointer;
-    }
-
-    .equality-cell:hover {
-      transform: scale(1.05);
-      background: #2a3166;
-    }
-
-    .equality-cell.hover-active {
-      background: #3a4574 !important;
-    }
-
-    .equality-cell.correct {
-      background: #3bd16f !important;
-    }
-
-    .equality-cell.wrong {
-      background: #e04f5f !important;
-    }
-
-    .equality-label.hover-active {
-      font-weight: 600;
-      color: #e134b9;
-    }
-
-    .equality-label-header {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-    }
-
-    .equality-label-row {
-      justify-self: end;
-      width: max-content;
-    }
-  </style>
 
   <div id="equality-map"></div>
 
