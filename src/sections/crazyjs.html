@@ -1,0 +1,89 @@
+<h2>Crazy JS: Equality Map</h2>
+
+<div class="section-content">
+  <p>Interaktives Spiel zu den Vergleichsoperatoren in JavaScript.</p>
+
+  <strong>== (loose equality):</strong> Führt Typ-Konversion durch
+  <pre><code class="language-javascript">'' == 0; // true (leerer String wird zu 0 konvertiert)
+0 == false; // true (false wird zu 0 konvertiert)
+null == undefined; // true (spezielle Regel)</code></pre>
+  <strong>=== (strict equality):</strong> Vergleicht ohne Konversion
+  <pre><code class="language-javascript">'' === 0; // false (unterschiedliche Typen)
+0 === false; // false (unterschiedliche Typen)
+null === undefined; // false (unterschiedliche Typen)</code></pre>
+
+  <strong>Spielregeln:</strong>
+  <ul>
+    <li><strong>🖱️Linksklick</strong> = <code>true</code></li>
+    <li><strong>🖱️Rechtsklick</strong> = <code>false</code></li>
+  </ul>
+
+  <div style="display: flex; gap: 10px">
+    <label for="equality-operator"><strong>Operator:</strong></label>
+    <select id="equality-operator">
+      <option value="==">==</option>
+      <option value="===">===</option>
+    </select>
+    <strong id="equality-score" style="margin-left: auto">Punkte: 0</strong>
+  </div>
+
+  <style>
+    #equality-map {
+      justify-content: center;
+    }
+
+    .equality-grid {
+      display: grid;
+      gap: 4px;
+      margin-top: 12px;
+      user-select: none;
+    }
+
+    .equality-cell {
+      width: 25px;
+      height: 25px;
+      border-radius: 6px;
+      background: #1f2444;
+      cursor: pointer;
+    }
+
+    .equality-cell:hover {
+      transform: scale(1.05);
+      background: #2a3166;
+    }
+
+    .equality-cell.hover-active {
+      background: #3a4574 !important;
+    }
+
+    .equality-cell.correct {
+      background: #3bd16f !important;
+    }
+
+    .equality-cell.wrong {
+      background: #e04f5f !important;
+    }
+
+    .equality-label.hover-active {
+      font-weight: 600;
+      color: #e134b9;
+    }
+
+    .equality-label-header {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .equality-label-row {
+      justify-self: end;
+      width: max-content;
+    }
+  </style>
+
+  <div id="equality-map"></div>
+
+  <p>
+    <strong>Best Practice:</strong> Verwende immer <code>===</code> für
+    Vergleiche, um überraschende Typ-Konversionen zu vermeiden!
+  </p>
+</div>

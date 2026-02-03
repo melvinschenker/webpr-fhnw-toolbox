@@ -14,6 +14,7 @@ const SECTIONS = [
   { file: "lazyCalculation.html" },
   { file: "iterators.html" },
   { file: "observer.html" },
+  { file: "crazyjs.html" },
 ];
 
 /**

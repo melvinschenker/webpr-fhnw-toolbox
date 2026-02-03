@@ -7,6 +7,7 @@ import { loadSections, setupSectionToggles } from './modules/sectionLoader.js';
 import { buildTableOfContents } from './modules/tocBuilder.js';
 import { setupScrollTracking } from './modules/scrollTracker.js';
 import { setupObserverDemo } from './modules/observable.js';
+import { setupEqualityMap } from './modules/equalityMap.js';
 
 /**
  * Initialize the application when the page loads.
@@ -18,6 +19,7 @@ const init = async () => {
   buildTableOfContents();
   setupScrollTracking();
   setupObserverDemo();
+  setupEqualityMap();
 };
 
 // Start Application
