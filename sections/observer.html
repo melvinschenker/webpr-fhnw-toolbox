@@ -1,0 +1,76 @@
+<h2>Observer Pattern</h2>
+
+<div class="section-content">
+  <p>
+    Das <strong>Observer Pattern</strong> definiert eine
+    <strong>Abhängigkeit-zu-vielen</strong>-Beziehung: Ein Objekt (Observable)
+    verwaltet einen Zustand und benachrichtigt automatisch alle registrierten
+    Observer bei Änderungen.
+  </p>
+  <p>
+    <strong>Im DOM existiert dieses Pattern bereits:</strong>
+    Neben <code>addEventListener</code> gibt es z.B.
+    <code>MutationObserver</code> (DOM-Änderungen),
+    <code>ResizeObserver</code> (Größenänderungen),
+    <code>IntersectionObserver</code> (Sichtbarkeit) und Media-Query-Listener.
+    Alle reagieren auf Zustände/Ereignisse.
+  </p>
+  <pre><code class="language-javascript">// Observer Pattern im DOM:
+button.addEventListener('click', () => {
+  console.log('Reagiert auf click');
+});</code></pre>
+
+  <h3>Observable-Klasse (aus script.js)</h3>
+  <pre><code class="language-javascript">class Observable {
+  constructor(initialValue = null) {
+    this.value = initialValue;
+    this.subscribers = [];
+  }
+
+  /**
+   * Registriert einen Observer (Callback-Funktion)
+   * @param {Function} observer - Wird sofort aufgerufen und bei Wertänderung wieder aufgerufen
+   * @returns {Function} Unsubscribe-Funktion
+   */
+  subscribe(observer) {
+    this.subscribers.push(observer); // Sofort mit aktuellem Wert aufrufen
+    return () => {
+      this.subscribers = this.subscribers.filter((o) => o !== observer);
+    };
+  }
+
+  /**
+   * Neuen Wert setzen und alle Subscriber benachrichtigen
+   * @param {*} newValue - Der neue Wert
+   */
+  setValue(newValue) {
+    if (this.value !== newValue) {
+      this.value = newValue;
+      this.subscribers.forEach((observer) => observer(this.value));
+    }
+  }
+}</code></pre>
+
+  <h3>Verwendungsbeispiel</h3>
+  <pre><code class="language-javascript">const textInput = new Observable('');
+textInput.subscribe(updateTextBox);
+textInput.subscribe(updateColorBox);
+
+input.addEventListener('input', e => textInput.setValue(e.target.value));</code></pre>
+
+  <h3>Interaktive Demo</h3>
+  <p>
+    Gib einen Text ein. Box 1 zeigt den Text, Box 2 färbt sich bei Farbwörtern ('red', 'blue', etc..).
+  </p>
+
+  <input
+    id="observer-input"
+    type="text"
+    placeholder="Text eingeben, z.B. 'Hello red'"
+  />
+
+  <div style="display: flex; gap: 5px; margin-top: 5px">
+    <div id="observer-text" style="border: 1px black solid; width: 70%"></div>
+    <div id="observer-color" style="border: 1px black solid; width: 30%"></div>
+  </div>
+</div>
